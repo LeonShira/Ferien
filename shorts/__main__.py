@@ -5,8 +5,10 @@
     python -m shorts next                   print the next topic (JSON)
     python -m shorts new <topic_id>         create content/episodes/<date>-<topic>.yaml from the template
     python -m shorts lint <episode_id>      compliance + length + fact checks (exit 1 on errors)
-    python -m shorts prompts <episode_id>   print the Higgsfield image/TTS requests for the episode (JSON)
-    python -m shorts fetch <episode_id>     download generated assets into output/<id>/
+    python -m shorts voice <episode_id>     narrate every line in the channel voice, then run `listen`
+    python -m shorts listen <episode_id>    transcribe the narration, flag mispronounced lines, time captions
+    python -m shorts prompts <episode_id>   print Higgsfield requests for optional `image` scenes (JSON)
+    python -m shorts fetch <episode_id>     download generated stills into output/<id>/
     python -m shorts render <episode_id>    build output/<id>/final.mp4 and run QA
     python -m shorts publish <episode_id> [--dry-run] [--now]
     python -m shorts mark <topic_id> <status>
@@ -28,7 +30,7 @@ from urllib.parse import urlparse
 
 import requests
 
-from . import backlog, lint, publish, render
+from . import backlog, lint, listen, publish, render, tts
 from .config import (EPISODES_DIR, ROOT, episode_output_dir, episode_path, load_channel, load_yaml,
                      save_yaml)
 
@@ -65,6 +67,17 @@ def cmd_doctor(_args) -> int:
         report(f" {f} " in filters, f"ffmpeg filter {f}")
     report((ROOT / "video" / "node_modules" / ".bin" / "remotion").exists(),
            "video/node_modules installed (run: cd video && npm ci)")
+    for module in ("kokoro_onnx", "soundfile", "faster_whisper"):
+        try:
+            __import__(module)
+            report(True, f"python module {module}")
+        except ImportError:
+            report(False, f"python module {module} (run: bash scripts/session-setup.sh)")
+    if channel["tts"]["provider"] == "kokoro":
+        report(all((tts.CACHE / n).exists() for n in tts.KOKORO_FILES), f"Kokoro model files in {tts.CACHE}")
+    elif channel["tts"]["provider"] == "elevenlabs":
+        report(bool(os.environ.get("ELEVENLABS_API_KEY")) and bool(channel["tts"]["elevenlabs"].get("voice_id")),
+               "ELEVENLABS_API_KEY set and tts.elevenlabs.voice_id configured")
     for f in ("topics.yaml", "series.yaml", "episode_template.yaml"):
         report((ROOT / "content" / f).exists(), f"content/{f}")
     provider = channel["publishing"]["provider"]
@@ -146,11 +159,11 @@ def cmd_lint(args) -> int:
 
 
 def cmd_prompts(args) -> int:
-    """Emit ready-to-submit generation requests so every run uses identical settings."""
+    """Emit ready-to-submit image requests so every run uses identical settings."""
     ep = _load_episode(args.episode_id)
     hf = load_channel()["higgsfield"]
     style = " ".join(hf["style_formula"].split())
-    images, audio = [], []
+    images = []
     for i, s in enumerate(ep["scenes"], 1):
         v = s.get("visual") or {}
         if v.get("type") == "image" and v.get("prompt") and not v.get("src"):
@@ -158,12 +171,42 @@ def cmd_prompts(args) -> int:
                 "model": hf["image_model"], "aspect_ratio": "1:1", "resolution": hf["image_resolution"],
                 "prompt": f"{v['prompt'].strip()}. Style: {style}",
                 "medias": [{"role": "image_references", "value": hf["style_reference_media_id"]}]}})
-        audio.append({"index": i, "params": {
-            "model": hf["tts_model"], "variant": hf["tts_variant"],
-            "voice_id": hf["voice"]["id"], "voice_type": hf["voice"]["type"],
-            "prompt": s["narration"].strip()}})
-    print(json.dumps({"image_requests": images, "audio_requests": audio}, indent=2, ensure_ascii=False))
+    print(json.dumps({"image_requests": images}, indent=2, ensure_ascii=False))
     return 0
+
+
+def cmd_voice(args) -> int:
+    ep = _load_episode(args.episode_id)
+    channel = load_channel()
+    out = episode_output_dir(ep["id"])
+    started = time.time()
+    try:
+        paths = tts.synthesize(ep, channel, out)
+    except tts.TTSError as e:
+        print(f"narration failed: {e}")
+        return 1
+    provider = channel["tts"]["provider"]
+    settings = channel["tts"].get(provider) or {}
+    ep.setdefault("assets", {})["voice"] = {
+        "provider": provider, "voice": settings.get("voice") or settings.get("voice_id"),
+        "seconds": round(sum(render.duration(p) for p in paths), 2)}
+    _save_episode(ep)
+    print(f"{len(paths)} lines, {ep['assets']['voice']['seconds']} s of narration "
+          f"({provider}, {time.time() - started:.0f} s) -> {out.relative_to(ROOT)}/voiceNN.wav")
+    return cmd_listen(args)
+
+
+def cmd_listen(args) -> int:
+    """Transcribe the takes, compare with the script, store word timings for captions."""
+    ep = _load_episode(args.episode_id)
+    result = listen.listen(ep, episode_output_dir(ep["id"]))
+    errors, warnings = listen.problems(result, ep)
+    for w in warnings:
+        print("WARN  " + w)
+    for e in errors:
+        print("ERROR " + e)
+    print("LISTEN PASS" if not errors else f"LISTEN FAIL ({len(errors)} lines): fix the text or add `say:` respellings")
+    return 1 if errors else 0
 
 
 def _download(url: str, dest_stem: Path) -> Path:
@@ -189,15 +232,12 @@ def cmd_fetch(args) -> int:
     out = episode_output_dir(ep["id"])
     out.mkdir(parents=True, exist_ok=True)
     assets = ep.get("assets", {}).get("scenes") or []
-    if len(assets) != len(ep["scenes"]):
+    if assets and len(assets) != len(ep["scenes"]):
         sys.exit(f"assets.scenes has {len(assets)} entries for {len(ep['scenes'])} scenes")
     for i, a in enumerate(assets, 1):
-        for key, stem in (("image_url", f"scene{i:02d}"), ("audio_url", f"voice{i:02d}")):
-            if a.get(key):
-                path = _download(a[key], out / stem)
-                print(f"{key:<10} scene {i:02d} -> {path.relative_to(ROOT)}")
-    ep["status"] = "assets"
-    _save_episode(ep)
+        if a.get("image_url"):
+            path = _download(a["image_url"], out / f"scene{i:02d}")
+            print(f"image scene {i:02d} -> {path.relative_to(ROOT)}")
     return 0
 
 
@@ -276,7 +316,8 @@ def main(argv: list[str] | None = None) -> int:
     s.add_argument("--date")
     s.add_argument("--force", action="store_true")
     s.set_defaults(fn=cmd_new)
-    for name, fn in (("lint", cmd_lint), ("prompts", cmd_prompts), ("fetch", cmd_fetch)):
+    for name, fn in (("lint", cmd_lint), ("voice", cmd_voice), ("listen", cmd_listen), ("prompts", cmd_prompts),
+                     ("fetch", cmd_fetch)):
         s = sub.add_parser(name)
         s.add_argument("episode_id")
         s.set_defaults(fn=fn)

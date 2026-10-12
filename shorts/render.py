@@ -18,7 +18,7 @@ import shutil
 import subprocess
 from pathlib import Path
 
-from .captions import chunk_words, time_chunks
+from .captions import chunk_words, chunks_from_words, time_chunks
 from .visuals import expand_visual
 
 IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".webp")
@@ -83,10 +83,21 @@ def _pick_music(prod: dict, root: Path, seed: str) -> Path | None:
     return tracks[int(hashlib.sha256(seed.encode()).hexdigest(), 16) % len(tracks)]
 
 
+def load_alignment(asset_dir: Path, n_scenes: int) -> list[list[list[float]]] | None:
+    """Word timestamps from `shorts listen`, if they belong to the current takes."""
+    path = asset_dir / "alignment.json"
+    takes = [find_asset(asset_dir, f"voice{i:02d}", AUDIO_EXTS) for i in range(1, n_scenes + 1)]
+    if not path.exists() or None in takes or any(t.stat().st_mtime > path.stat().st_mtime for t in takes):
+        return None
+    lines = json.loads(path.read_text(encoding="utf-8"))["lines"]
+    return [line["words"] for line in lines] if len(lines) == n_scenes else None
+
+
 def build_props(episode: dict, channel: dict, series: dict, timings: list[dict], total: float,
                 asset_dir: Path) -> dict:
     prod = channel["production"]
     theme = dict(DEFAULT_THEME, **(series.get("theme") or {}))
+    aligned = load_alignment(asset_dir, len(episode["scenes"]))
     scenes = []
     for i, (scene, t) in enumerate(zip(episode["scenes"], timings), 1):
         visual = expand_visual(scene["visual"])
@@ -96,7 +107,8 @@ def build_props(episode: dict, channel: dict, series: dict, timings: list[dict],
                 raise RenderError(f"scene {i}: image scene needs scene{i:02d}.(png|jpg|webp) in {asset_dir}")
             visual["src"] = still.name
         visual.pop("prompt", None)
-        captions = time_chunks(chunk_words(scene["narration"]), t["speech_start"], t["speech_end"])
+        captions = (chunks_from_words(scene["narration"], aligned[i - 1], t["start"]) if aligned else []) \
+            or time_chunks(chunk_words(scene["narration"]), t["speech_start"], t["speech_end"])
         scenes.append({"start": round(t["start"], 3), "duration": round(t["end"] - t["start"], 3),
                        "visual": visual, "captions": captions})
     return {

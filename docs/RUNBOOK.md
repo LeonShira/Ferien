@@ -11,8 +11,8 @@ python -m shorts doctor
 python -m shorts status
 ```
 
-- Higgsfield `balance`: if credits < `budget.min_balance_reserve` + 10, stop and report
-  "Higgsfield credits low" (do not buy anything).
+- Only if you plan `image` scenes: check the Higgsfield `balance`; if credits are below
+  `budget.min_balance_reserve` + 10, write the episode without `image` scenes (do not buy anything).
 - If `budget.max_unpublished_buffer` or more episodes are waiting in `rendered`, skip steps 1-4
   (don't spend credits) and go straight to step 5.
 
@@ -33,9 +33,10 @@ regulator sources. If the evidence is weak or disputed, pick the next topic
 Edit `content/episodes/<id>.yaml` (format: the pilot `2026-10-12-credit-card-minimum-trap.yaml`).
 
 - Follow the series `beats`, in your own words. Change the hook pattern from the last episodes.
-- 9-13 scenes, one or two sentences per scene, 145-170 words total (~70-80 s at the voice's ~2.15 words/s).
+- 9-13 scenes, one or two sentences per scene, 160-190 words total (~65-75 s at the voice's ~2.7 words/s).
 - First sentence <= 14 words and it states the payoff. `hook_text` <= 8 words.
-- Narration: plain spoken English with figures as digits ("$5,000", "24%"), no filler.
+- Narration: write for the ear (docs/VOICE.md). Name the currency once, then bare numbers ("150 a month");
+  at most 2 figures per line; round when precision doesn't matter; contractions; no filler.
 - Explain, never advise. Use "here's how it works" and "the math shows", never "you should buy, sell or invest".
   Specific products, tickers, coins and price predictions are off-limits.
 - Visuals: see `docs/VISUALS.md`. Use `calc` for every number on screen.
@@ -47,21 +48,19 @@ Edit `content/episodes/<id>.yaml` (format: the pilot `2026-10-12-credit-card-min
 python -m shorts lint <id>     # must print PASS; fix every ERROR, fix WARNs when sensible
 ```
 
-## 3. Narration (Higgsfield, ~0.45 credits per line)
+## 3. Narration (local voice, free)
 
 ```bash
-python -m shorts prompts <id>  # exact generate_audio params for every line
+python -m shorts voice <id>    # narrates every line in the channel voice, then runs the listening check
 ```
 
-- Submit `audio_requests` with `generate_audio_batch` **in batches of 3** (bigger batches hit 429 rate limits),
-  then `jobs_wait`. Resubmit any `submission_failed` item in the next batch.
-- Never change `voice_id`, model or variant: the channel voice is locked in `channel.yaml`.
-- Optional `image` scenes: submit `image_requests` with `generate_image_batch` (max 3 per episode).
-- Write each result into `assets.scenes[i]` as `audio_url` / `image_url` (with job ids), in scene order.
-
-```bash
-python -m shorts fetch <id>
-```
+- The voice is Kokoro, running on this machine: same voice every time, no credits, no account.
+- `LISTEN PASS` is a gate. Every line is transcribed and compared with the script; a failed line
+  shows what was actually heard. Fix the wording, or add `say:` with a respelling (docs/VOICE.md),
+  and run `voice` again.
+- Optional `image` scenes (max 3 per episode, ~1.25 credits each): run `python -m shorts prompts <id>`,
+  submit the `image_requests` with Higgsfield `generate_image_batch` in batches of 3, `jobs_wait`,
+  write each result's URL into `assets.scenes[i].image_url` (scene order), then `python -m shorts fetch <id>`.
 
 ## 4. Render and check
 
@@ -80,8 +79,8 @@ Publish the **oldest** episode in `rendered` (`python -m shorts status`), which 
 only when nothing older is waiting. One post per day keeps the cadence steady.
 
 Each run starts in a fresh container, so an older episode's `output/<id>/final.mp4` won't exist.
-Rebuild it first; it costs no credits because the narration URLs are stored in the episode:
-`python -m shorts fetch <id> && python -m shorts render <id>`.
+Rebuild it first; it costs no credits (the voice is local and any stills' URLs are stored in the episode):
+`python -m shorts voice <id> && python -m shorts fetch <id> && python -m shorts render <id>`.
 
 ```bash
 python -m shorts publish <id> --dry-run   # inspect captions and settings
@@ -95,7 +94,7 @@ to Higgsfield (`media_upload` -> curl PUT -> `media_confirm`) and record the hos
 
 ## 6. Record and report
 
-- Note the credits spent (balance before minus after) in the episode as `cost_credits`.
+- If you generated stills, note the credits spent in the episode as `cost_credits`.
 - Commit `content/` changes with a message like `episode: <id>` and push.
 - Final message: topic, title, length, credits, publish status (scheduled time or why not),
   and anything that needs a human.

@@ -6,7 +6,8 @@ Claude session.
 
 - **Motion graphics drawn from code** (Remotion): counters, charts, comparisons, myth/fact
   reveals, timelines. No video-generation credits, and every number on screen is computed.
-- **Narration** by an ElevenLabs voice through Higgsfield, ~5 credits per video.
+- **Narration** by a local open-source voice (Kokoro), free and identical every time, checked by a
+  speech-recognition pass that must hear exactly the script. ElevenLabs is a one-line switch.
 - **Compliance gate** before every render: education not advice, every number recomputed or
   sourced, length > 61 s for TikTok Creator Rewards, variety checks against templated content.
 - **Publishing** through Upload-Post, with AI-content labels on both platforms.
@@ -25,3 +26,4 @@ python -m pytest tests                        # 25 tests
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | How it fits together, costs, design decisions |
 | [docs/RUNBOOK.md](docs/RUNBOOK.md) | What the daily agent does, step by step |
 | [docs/VISUALS.md](docs/VISUALS.md) | Scene types and computed numbers for script writing |
+| [docs/VOICE.md](docs/VOICE.md) | Writing narration that sounds like a person |

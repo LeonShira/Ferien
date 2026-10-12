@@ -5,14 +5,14 @@ language: en
 status: rendered
 hook_text: $5,000 of debt. $150 a month.
 scenes:
-- narration: Paying $150 a month on a $5,000 card takes almost five years. Here's why.
+- narration: Pay your card on time every month, and it still takes almost five years.
   visual:
     type: title
     text: The $150-a-month slow lane
     emoji: 💳
     accentWords:
     - slow
-- narration: You owe $5,000 on a credit card that charges 24% interest a year.
+- narration: Say you owe $5,000 on a credit card that charges 24% a year.
   visual:
     type: big_number
     from: 0
@@ -21,8 +21,7 @@ scenes:
     label: Card balance
     emoji: 💳
     sub: at 24% interest a year
-- narration: In month one, the card adds $100 of interest. So from your $150 payment, only $50 shrinks
-    the debt.
+- narration: You pay 150 a month. But in the first month, 100 of that is just interest.
   visual:
     type: ring
     title: Your first $150 payment
@@ -35,7 +34,7 @@ scenes:
       round: 0
     label: goes straight to interest
     bad: true
-- narration: Keep paying $150 every month, and it takes 56 months to clear. That's almost five years.
+- narration: At that pace, you're making payments for 56 months before you hit zero.
   visual:
     type: big_number
     from: 0
@@ -49,7 +48,7 @@ scenes:
     label: Paying $150 a month
     emoji: 🐢
     sub: to reach a zero balance
-- narration: 'Total interest: $3,322. You pay back $8,322 for $5,000 of stuff.'
+- narration: All in, that's about 3,300 in interest on top of what you borrowed.
   visual:
     type: bar_compare
     title: What $5,000 really costs
@@ -66,7 +65,7 @@ scenes:
           monthly_payment: 150
         round: 0
       highlight: true
-- narration: Double it to $300 a month, and you're done in 21 months, with $1,143 of interest.
+- narration: Now pay 300 a month instead. Same card, same rate. You're done in 21 months.
   visual:
     type: split_compare
     title: Same card, two habits
@@ -83,8 +82,7 @@ scenes:
       - 21 months
       - $1,143 interest
       highlight: true
-- narration: Watch both balances. The bigger payment finishes sooner and leaves less for interest to grow
-    on.
+- narration: Look at both lines. The bigger payment ends sooner and leaves less for interest to grow on.
   visual:
     type: line_chart
     title: Balance left
@@ -113,8 +111,7 @@ scenes:
         from: 0
         to: 22
         step: 2
-- narration: That's about two thirds less interest, because interest is charged on whatever is left, every
-    month.
+- narration: That's about two thirds less interest, because it's charged on whatever you still owe.
   visual:
     type: bar_compare
     title: Total interest paid
@@ -137,12 +134,12 @@ scenes:
           monthly_payment: 300
         round: 0
       highlight: true
-- narration: Paying on time avoids late fees. But a small payment barely moves the balance.
+- narration: Paying on time keeps the late fees away. It just doesn't move the balance much.
   visual:
     type: myth_fact
     myth: A small payment is fine as long as it's on time
     fact: On time avoids fees, but small payments mostly feed interest
-- narration: So every extra dollar paid early saves interest for every month after it.
+- narration: So every extra bit you pay early keeps saving you interest, month after month.
   visual:
     type: list
     title: What the math shows
@@ -150,8 +147,7 @@ scenes:
     - Interest is charged on what's left
     - Small payments mostly feed interest
     - Extra payments save interest every month after
-- narration: This is an example, so check your own card's rate and terms. Follow for one money idea a
-    day.
+- narration: This is just an example, so check your own card's terms. Follow for one money idea a day.
   visual:
     type: emoji
     emojis:
@@ -161,21 +157,7 @@ scenes:
     flow: false
     label: Know your numbers
 claims:
-- statement: $5,000 at 24% a year accrues $100 of interest in the first month
-  check:
-    calc: multiply
-    args:
-      a: 5000
-      b: 0.02
-    expect: 100
-- statement: Only $50 of a $150 payment reduces the debt in month one
-  check:
-    calc: subtract
-    args:
-      a: 150
-      b: 100
-    expect: 50
-- statement: Paying $150 a month takes 56 months
+- statement: Paying 150 a month takes almost five years (56 months)
   check:
     calc: payoff_months
     args:
@@ -183,57 +165,6 @@ claims:
       apr: 0.24
       monthly_payment: 150
     expect: 56
-    tolerance: 0
-- statement: Total interest at $150 a month is $3,322
-  check:
-    calc: payoff_interest
-    args:
-      balance: 5000
-      apr: 0.24
-      monthly_payment: 150
-    expect: 3322
-    tolerance: 0.001
-- statement: Total repaid is $8,322
-  check:
-    calc: add
-    args:
-      a: 5000
-      b: 3322.09
-    expect: 8322
-    tolerance: 0.001
-- statement: Paying $300 a month takes 21 months
-  check:
-    calc: payoff_months
-    args:
-      balance: 5000
-      apr: 0.24
-      monthly_payment: 300
-    expect: 21
-    tolerance: 0
-- statement: Total interest at $300 a month is $1,143
-  check:
-    calc: payoff_interest
-    args:
-      balance: 5000
-      apr: 0.24
-      monthly_payment: 300
-    expect: 1143
-    tolerance: 0.001
-- statement: Doubling the payment cuts total interest by about two thirds
-  check:
-    calc: percent_change
-    args:
-      old: 3322.09
-      new: 1143.34
-    expect: -0.66
-    tolerance: 0.03
-- statement: $150 vs $300 a month is a 35-month difference
-  check:
-    calc: subtract
-    args:
-      a: 56
-      b: 21
-    expect: 35
     tolerance: 0
 - statement: 56 months is almost five years
   check:
@@ -243,12 +174,52 @@ claims:
       b: 12
     expect: 4.67
     tolerance: 0.01
+- statement: Interest takes 100 of the first 150 payment
+  check:
+    calc: multiply
+    args:
+      a: 5000
+      b: 0.02
+    expect: 100
+- statement: About 3,300 in total interest at 150 a month
+  check:
+    calc: payoff_interest
+    args:
+      balance: 5000
+      apr: 0.24
+      monthly_payment: 150
+    expect: 3300
+    tolerance: 0.02
+- statement: Paying 300 a month clears it in 21 months
+  check:
+    calc: payoff_months
+    args:
+      balance: 5000
+      apr: 0.24
+      monthly_payment: 300
+    expect: 21
+    tolerance: 0
+- statement: Interest drops by about two thirds
+  check:
+    calc: percent_change
+    args:
+      old: 3322.09
+      new: 1143.34
+    expect: -0.66
+    tolerance: 0.03
+- statement: 150 vs 300 a month is a 35-month difference
+  check:
+    calc: subtract
+    args:
+      a: 56
+      b: 21
+    expect: 35
+    tolerance: 0
 sources:
 - https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-card-interest-rate-what-does-apr-mean-en-44/
 metadata:
   title: Why $150 a month on a $5,000 credit card takes almost 5 years
-  caption: Same card, same 24% rate. $150 a month vs $300 a month is a 35-month difference. Here's the
-    math.
+  caption: Same card, same 24% rate. 150 a month vs 300 a month is a 35-month difference. Here's the math.
   description: 'A $5,000 credit card balance at 24% interest a year: paying $150 a month takes 56 months
     and costs $3,322 in interest. Paying $300 a month clears it in 21 months for $1,143. The reason is
     that interest is charged on whatever balance is left each month. Figures are an illustration with
@@ -268,45 +239,34 @@ metadata:
   - financial literacy
 assets:
   voice:
-    id: d8ba9f14-8a24-44db-932b-99e16c45bd32
-    type: preset
-    model: text2speech_v2/elevenlabs
+    provider: kokoro
+    voice: af_heart
+    seconds: 59.24
   scenes:
-  - audio_job_id: 8aec4c4c-7990-4fb9-ad1a-5c84025bb06c
-    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205126_8aec4c4c-7990-4fb9-ad1a-5c84025bb06c.mp3
-  - audio_job_id: 791e9d6c-2499-42d1-ab65-8d8720294ff2
-    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_211501_791e9d6c-2499-42d1-ab65-8d8720294ff2.mp3
-  - audio_job_id: fda2a1fc-7655-4093-9765-e1376f6dac02
-    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205112_fda2a1fc-7655-4093-9765-e1376f6dac02.mp3
-  - audio_job_id: 8dec4bca-d0a6-4348-9d8d-3a70c89436c6
-    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205112_8dec4bca-d0a6-4348-9d8d-3a70c89436c6.mp3
-  - audio_job_id: a337d169-0b67-4bb2-aa45-a6543a6e34d8
-    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_211501_a337d169-0b67-4bb2-aa45-a6543a6e34d8.mp3
-  - audio_job_id: 58b088d5-9302-43d8-887a-271bf2e28187
-    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_211502_58b088d5-9302-43d8-887a-271bf2e28187.mp3
-  - audio_job_id: 36a6f6f7-1c6c-47f9-860c-5e7dc062c18f
-    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205112_36a6f6f7-1c6c-47f9-860c-5e7dc062c18f.mp3
-  - audio_job_id: b74070e4-fcbf-427b-b3a3-9634e42e8927
-    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_211510_b74070e4-fcbf-427b-b3a3-9634e42e8927.mp3
-  - audio_job_id: 385e6098-d66b-49b8-b299-af81a52f97bf
-    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205112_385e6098-d66b-49b8-b299-af81a52f97bf.mp3
-  - audio_job_id: 99046223-10b8-49ba-a4d9-79f8ad698bfb
-    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_211510_99046223-10b8-49ba-a4d9-79f8ad698bfb.mp3
-  - audio_job_id: 718b6afd-df09-41df-8818-f3b56acc7b6a
-    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205112_718b6afd-df09-41df-8818-f3b56acc7b6a.mp3
+  - {}
+  - {}
+  - {}
+  - {}
+  - {}
+  - {}
+  - {}
+  - {}
+  - {}
+  - {}
+  - {}
+cost_credits: 5.25
+cost_note: 'pilot: 16 narration lines incl. 5 regenerated after trimming'
 render:
   path: output/2026-10-12-credit-card-minimum-trap/final.mp4
-  duration: 80.47
-  size_mb: 15.01
-  sha256: fd6abbedf4feef0bbbd2e6038b6cb6fc7b101a5c098667422e6462e2fbdeefee
+  duration: 63.74
+  size_mb: 12.52
+  sha256: b6c29125998da8ce9868c8c4b2322b1dfe9e3a1d115bef99f8948851a00fc8d9
   music: null
   checks:
     resolution: 1080x1920
     fps: 30.0
-    duration: 80.47
+    duration: 63.74
     has_audio: true
-    mean_volume_db: -16.9
+    mean_volume_db: -17.4
     passed: true
     problems: []
-cost_credits: 5.25
-cost_note: 'pilot: 16 narration lines incl. 5 regenerated after trimming'

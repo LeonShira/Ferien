@@ -9,10 +9,11 @@ Total time: about 20 minutes.
 The Routine **Daily money short** already exists and runs every day at 08:59 Berlin time. It was
 created without connectors, so open it under Routines at https://claude.ai/code, choose **Edit**, then:
 
-- add the **Higgsfield** connector (it makes the narrator voice), and
-- add the **LeonShira/Ferien** repository,
+- add the **LeonShira/Ferien** repository, and
+- optionally add the **Higgsfield** connector (only used for the occasional illustrated still;
+  the narrator voice runs locally and needs nothing),
 
-and save. Without the connector, each run stops and reports that it's missing.
+and save.
 
 ## 1. Create the two channels (about 10 min)
 
@@ -44,10 +45,12 @@ UPLOAD_POST_API_KEY=<your key>
 Optional: `UPLOAD_POST_USER=<profile name>` if you created more than one Upload-Post profile.
 New sessions, including the daily Routine, pick it up automatically.
 
-## 4. Keep Higgsfield topped up
+## 4. Optional: premium voice
 
-Narration costs about 5 credits per video, so roughly 150 credits a month at one video a day.
-The pipeline stops and tells you before credits run out; it never buys credits on its own.
+The narrator runs locally for free (Kokoro). If you prefer ElevenLabs quality after listening to
+`output/voice-samples/`, get the Starter plan (~$5-6/mo, commercial license, about 30 videos a month),
+add `ELEVENLABS_API_KEY` the same way as step 3, put your chosen voice's id in `channel.yaml`
+under `tts.elevenlabs.voice_id`, and set `tts.provider: elevenlabs`.
 
 ## 5. Later: monetisation
 

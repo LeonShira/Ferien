@@ -46,3 +46,21 @@ def time_chunks(chunks: list[str], start: float, end: float) -> list[dict]:
         out.append({"start": round(t, 3), "end": round(t + d, 3), "text": c.rstrip(",;:")})
         t += d
     return out
+
+
+def chunks_from_words(text: str, times: list[list[float]], offset: float) -> list[dict]:
+    """Caption chunks timed from per-word timestamps (see shorts/listen.py)."""
+    words = text.split()
+    if len(times) != len(words) or not words:
+        return []
+    out, i = [], 0
+    for chunk in chunk_words(text):
+        n = len(chunk.split())
+        out.append({"start": round(offset + times[i][0], 3), "end": round(offset + times[i + n - 1][1], 3),
+                    "text": chunk.rstrip(",;:")})
+        i += n
+    # Hold each chunk until the next one starts so captions never blink off mid-sentence.
+    for a, b in zip(out, out[1:]):
+        if b["start"] - a["end"] < 0.6:
+            a["end"] = b["start"]
+    return out

@@ -48,6 +48,8 @@ VISUAL_BANNED = [
 ]
 
 FILLER = re.compile(r"\b(basically|literally|actually|in this video|let'?s dive in|without further ado|smash that like|don'?t forget to subscribe)\b", re.I)
+CURRENCY = re.compile(r"[$€£]|\b(?:dollars?|euros?|pounds? sterling|bucks)\b", re.I)
+FIGURE = re.compile(r"[$€£]?\d[\d,.]*%?")
 WORD = re.compile(r"[A-Za-zÀ-ÖØ-öø-ÿ0-9][A-Za-zÀ-ÖØ-öø-ÿ0-9'’%.,€$-]*")
 
 
@@ -125,6 +127,20 @@ def lint_episode(episode: dict, channel: dict, previous: list[dict] | None = Non
                 errors.append(f"scene {i} image prompt: {label} (generators garble text; real brands and people are off-limits)")
         if FILLER.search(s.get("narration", "")):
             warnings.append(f"scene {i}: filler phrase: {FILLER.search(s['narration']).group(0)!r}")
+        figures = FIGURE.findall(s.get("narration", ""))
+        if len(figures) > 2:
+            warnings.append(f"scene {i}: {len(figures)} figures in one line ({', '.join(figures)}); "
+                            "keep it to 2 and let the visual carry the rest (docs/VOICE.md)")
+        if s.get("say"):
+            a, b = len(words(s["say"])), max(1, n)
+            if abs(a - b) / b > 0.25:
+                errors.append(f"scene {i}: `say` must be the same words as `narration` (respelled only)")
+
+    # Spoken style: name the currency once or twice, then talk like a person.
+    currency = CURRENCY.findall(narration(episode))
+    if len(currency) > 3:
+        errors.append(f"currency named {len(currency)} times in the narration; say it once to set the scene, "
+                      "then use bare numbers (\"150 a month\"). Max 3 (docs/VOICE.md)")
 
     # Hook: the first spoken sentence must land fast.
     hook = _first_sentence(scenes[0].get("narration", ""))

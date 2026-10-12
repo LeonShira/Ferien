@@ -19,24 +19,29 @@ production:
   renderer: remotion                # motion graphics drawn from code in video/ (no generation credits)
   min_seconds: 61                   # TikTok Creator Rewards only pays on videos longer than 1 minute
   max_seconds: 90                   # sweet spot for retention; Shorts allow up to 180 s
-  words_per_second: 2.15            # measured pace of the locked voice (pilot: 191 words in 90.4 s)
+  words_per_second: 2.7             # measured pace of the channel voice (Kokoro af_heart at speed 0.85)
   width: 1080
   height: 1920
   fps: 30
   loudness_lufs: -14
-  scene_pad_seconds: 0.15           # pause after each narration line
+  scene_pad_seconds: 0.3            # breath between narration lines
   end_hold_seconds: 1.2             # extra hold on the final scene for the CTA
   music_dir: assets/music           # optional: drop royalty-free .mp3 files here for a ducked music bed
   music_volume_db: -24
 
+tts:
+  # Narration. kokoro runs locally for free; elevenlabs is the paid premium option.
+  provider: kokoro                  # kokoro | elevenlabs
+  kokoro:
+    voice: af_heart                 # Kokoro's highest-rated voice; others: am_michael, am_fenrir, bm_george, af_bella
+    speed: 0.85                     # 0.85 = ~2.7 words/s, a natural explainer pace
+  elevenlabs:                       # needs ELEVENLABS_API_KEY; one request per episode keeps one consistent delivery
+    voice_id: ""                    # pick a voice in the ElevenLabs voice library and paste its id here
+    model_id: eleven_multilingual_v2
+    stability: 0.6
+    similarity_boost: 0.8
+
 higgsfield:
-  # Narration is the only thing that must be generated. ~0.45 credits per line.
-  tts_model: text2speech_v2
-  tts_variant: elevenlabs
-  voice:                            # locked narrator voice: never change mid-series
-    id: d8ba9f14-8a24-44db-932b-99e16c45bd32
-    type: preset
-    name: Cillian
   # Optional illustrated stills for `image` scenes (history and scam stories). ~1.25 credits each.
   image_model: seedream_v5_pro
   image_resolution: "1k"
@@ -64,6 +69,6 @@ publishing:
     made_for_kids: false
 
 budget:
-  max_credits_per_video: 15         # narration (~4) + at most a few illustrated stills
+  max_credits_per_video: 5          # only optional illustrated stills cost credits now
   min_balance_reserve: 25           # never spend below this balance
   max_unpublished_buffer: 3         # if this many rendered videos are waiting to be posted, skip generating

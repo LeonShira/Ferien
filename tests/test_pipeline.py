@@ -195,3 +195,59 @@ def test_backlog_and_series_are_consistent():
     for s in series.values():
         for v in s["visuals"]:
             assert v in visuals.SCHEMA
+
+
+# spoken style + narration ------------------------------------------------
+
+def test_currency_repetition_blocks(pilot, channel):
+    ep = copy.deepcopy(pilot)
+    for s in ep["scenes"][:4]:
+        s["narration"] = s["narration"] + " That is $150 a month, dollars and dollars."
+    errors, _ = lint.lint_episode(ep, channel)
+    assert any("currency named" in e for e in errors)
+
+
+def test_figure_density_warns(pilot, channel):
+    ep = copy.deepcopy(pilot)
+    ep["scenes"][3]["narration"] = "It costs 150, then 300, then 3,300 in interest."
+    _, warnings = lint.lint_episode(ep, channel)
+    assert any("figures in one line" in w for w in warnings)
+
+
+def test_normalize_for_speech():
+    from shorts.tts import normalize_for_speech as n
+    assert n("Say you owe $5,000 on a card.") == "Say you owe 5,000 dollars on a card."
+    assert n("It costs $1 a day.") == "It costs 1 dollar a day."
+    assert n("A €2.5 million fine and £300.") == "A 2.5 million euros fine and 300 pounds."
+    assert n("24% a year, 150 a month.") == "24% a year, 150 a month."
+
+
+def test_spoken_lines_prefer_say(pilot):
+    from shorts.tts import spoken_lines
+    ep = copy.deepcopy(pilot)
+    ep["scenes"][0]["say"] = "Pay your card on time, every month."
+    assert spoken_lines(ep)[0] == "Pay your card on time, every month."
+
+
+def test_listen_wer_and_word_times():
+    from shorts import listen
+    script = "Say you owe $5,000 on a card at 24% a year."
+    assert listen.wer(listen.tokens(script), listen.tokens("Say you owe $5,000 on a card at 24% a year.")) == 0
+    assert listen.wer(listen.tokens(script), listen.tokens("Say U.O. dollar 5,000 on a card at 24% a year.")) > 0.15
+    heard = [{"word": w, "start": i * 0.5, "end": i * 0.5 + 0.4}
+             for i, w in enumerate("Say you owe $5,000 on a card at 24% a year.".split())]
+    heard[3]["word"] = "five-thousand"  # heard differently -> interpolated
+    times = listen.word_times(script, heard)
+    assert len(times) == len(script.split())
+    assert times[0] == (0.0, 0.4) and times[4] == (2.0, 2.4)
+    assert times[2][1] <= times[3][0] <= times[3][1] <= times[4][0]
+
+
+def test_chunks_from_words():
+    text = "Say you owe five thousand on a card."
+    times = [[i * 0.4, i * 0.4 + 0.3] for i in range(len(text.split()))]
+    chunks = captions.chunks_from_words(text, times, offset=10.0)
+    assert chunks[0]["start"] == 10.0
+    assert " ".join(c["text"] for c in chunks).rstrip(".") == text.rstrip(".")
+    assert all(a["end"] <= b["start"] + 1e-9 for a, b in zip(chunks, chunks[1:]))
+    assert captions.chunks_from_words(text, times[:-1], 0) == []
