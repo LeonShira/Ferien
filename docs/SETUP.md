@@ -18,7 +18,7 @@ and save. Without the connector, each run stops and reports that it's missing.
 
 - **TikTok:** create a new account for the channel (a personal account, not a Business account:
   Creator Rewards excludes business accounts). Pick a name and handle, and put a short bio and the
-  line "AI-assisted, human-checked. Education, not financial advice." in the bio.
+  line "Made with AI, numbers fact-checked. Education, not financial advice." in the bio.
 - **YouTube:** create a channel (a Brand Account under your Google account works well) with the same
   name and bio line.
 - If you are in Germany and monetise, both profiles need an Impressum (legal notice):
