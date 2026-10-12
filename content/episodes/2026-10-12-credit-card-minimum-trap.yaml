@@ -1,0 +1,298 @@
+id: 2026-10-12-credit-card-minimum-trap
+series: the-math
+topic_id: credit-card-minimum-trap
+language: en
+status: assets
+hook_text: $5,000 of debt. $150 a month.
+scenes:
+- narration: Paying $150 a month on a $5,000 card takes almost five years. Here's why.
+  visual:
+    type: title
+    text: The $150-a-month slow lane
+    emoji: 💳
+    accentWords:
+    - slow
+- narration: The setup is simple. You owe $5,000 on a credit card that charges 24% interest a year.
+  visual:
+    type: big_number
+    from: 0
+    to: 5000
+    prefix: $
+    label: Card balance
+    emoji: 💳
+    sub: at 24% interest a year
+- narration: In month one, the card adds $100 of interest. So from your $150 payment, only $50 shrinks
+    the debt.
+  visual:
+    type: ring
+    title: Your first $150 payment
+    value:
+      calc: divide
+      args:
+        a: 100
+        b: 150
+      scale: 100
+      round: 0
+    label: goes straight to interest
+    bad: true
+- narration: Keep paying $150 every month, and it takes 56 months to clear. That's almost five years.
+  visual:
+    type: big_number
+    from: 0
+    to:
+      calc: payoff_months
+      args:
+        balance: 5000
+        apr: 0.24
+        monthly_payment: 150
+    suffix: ' months'
+    label: Paying $150 a month
+    emoji: 🐢
+    sub: to reach a zero balance
+- narration: And the interest over that time? $3,322. You hand back $8,322 for $5,000 of stuff.
+  visual:
+    type: bar_compare
+    title: What $5,000 really costs
+    prefix: $
+    bars:
+    - label: Borrowed
+      value: 5000
+    - label: Interest on top
+      value:
+        calc: payoff_interest
+        args:
+          balance: 5000
+          apr: 0.24
+          monthly_payment: 150
+        round: 0
+      highlight: true
+- narration: Now double the payment to $300. Same card, same rate. You're debt-free in 21 months, with
+    $1,143 of interest.
+  visual:
+    type: split_compare
+    title: Same card, two habits
+    left:
+      title: $150 a month
+      emoji: 🐢
+      rows:
+      - 56 months
+      - $3,322 interest
+    right:
+      title: $300 a month
+      emoji: 🚀
+      rows:
+      - 21 months
+      - $1,143 interest
+      highlight: true
+- narration: Watch both balances. The bigger payment finishes sooner and leaves less for interest to grow
+    on.
+  visual:
+    type: line_chart
+    title: Balance left
+    prefix: $
+    xSuffix: ' mo'
+    series:
+    - label: $150 a month
+      calc:
+        calc: remaining_balance
+        args:
+          balance: 5000
+          apr: 0.24
+          monthly_payment: 150
+        vary: months
+        from: 0
+        to: 56
+        step: 2
+    - label: $300 a month
+      calc:
+        calc: remaining_balance
+        args:
+          balance: 5000
+          apr: 0.24
+          monthly_payment: 300
+        vary: months
+        from: 0
+        to: 22
+        step: 2
+- narration: Doubling the payment cuts the total interest by about two thirds, because interest is charged
+    on whatever is left, every single month.
+  visual:
+    type: bar_compare
+    title: Total interest paid
+    prefix: $
+    bars:
+    - label: $150 a month
+      value:
+        calc: payoff_interest
+        args:
+          balance: 5000
+          apr: 0.24
+          monthly_payment: 150
+        round: 0
+    - label: $300 a month
+      value:
+        calc: payoff_interest
+        args:
+          balance: 5000
+          apr: 0.24
+          monthly_payment: 300
+        round: 0
+      highlight: true
+- narration: Paying on time avoids late fees. But a small payment barely moves the balance.
+  visual:
+    type: myth_fact
+    myth: A small payment is fine as long as it's on time
+    fact: On time avoids fees, but small payments mostly feed interest
+- narration: 'The rule behind it: interest grows on what''s left, so every extra dollar paid early saves
+    interest every month after.'
+  visual:
+    type: list
+    title: What the math shows
+    items:
+    - Interest is charged on what's left
+    - Small payments mostly feed interest
+    - Extra payments save interest every month after
+- narration: This is an example, so check your own card's rate and terms. Follow for one money idea a
+    day.
+  visual:
+    type: emoji
+    emojis:
+    - 💳
+    - 🧮
+    - 🧠
+    flow: false
+    label: Know your numbers
+claims:
+- statement: $5,000 at 24% a year accrues $100 of interest in the first month
+  check:
+    calc: multiply
+    args:
+      a: 5000
+      b: 0.02
+    expect: 100
+- statement: Only $50 of a $150 payment reduces the debt in month one
+  check:
+    calc: subtract
+    args:
+      a: 150
+      b: 100
+    expect: 50
+- statement: Paying $150 a month takes 56 months
+  check:
+    calc: payoff_months
+    args:
+      balance: 5000
+      apr: 0.24
+      monthly_payment: 150
+    expect: 56
+    tolerance: 0
+- statement: Total interest at $150 a month is $3,322
+  check:
+    calc: payoff_interest
+    args:
+      balance: 5000
+      apr: 0.24
+      monthly_payment: 150
+    expect: 3322
+    tolerance: 0.001
+- statement: Total repaid is $8,322
+  check:
+    calc: add
+    args:
+      a: 5000
+      b: 3322.09
+    expect: 8322
+    tolerance: 0.001
+- statement: Paying $300 a month takes 21 months
+  check:
+    calc: payoff_months
+    args:
+      balance: 5000
+      apr: 0.24
+      monthly_payment: 300
+    expect: 21
+    tolerance: 0
+- statement: Total interest at $300 a month is $1,143
+  check:
+    calc: payoff_interest
+    args:
+      balance: 5000
+      apr: 0.24
+      monthly_payment: 300
+    expect: 1143
+    tolerance: 0.001
+- statement: Doubling the payment cuts total interest by about two thirds
+  check:
+    calc: percent_change
+    args:
+      old: 3322.09
+      new: 1143.34
+    expect: -0.66
+    tolerance: 0.03
+- statement: $150 vs $300 a month is a 35-month difference
+  check:
+    calc: subtract
+    args:
+      a: 56
+      b: 21
+    expect: 35
+    tolerance: 0
+- statement: 56 months is almost five years
+  check:
+    calc: divide
+    args:
+      a: 56
+      b: 12
+    expect: 4.67
+    tolerance: 0.01
+sources:
+- https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-card-interest-rate-what-does-apr-mean-en-44/
+metadata:
+  title: Why $150 a month on a $5,000 credit card takes almost 5 years
+  caption: Same card, same 24% rate. $150 a month vs $300 a month is a 35-month difference. Here's the
+    math.
+  description: 'A $5,000 credit card balance at 24% interest a year: paying $150 a month takes 56 months
+    and costs $3,322 in interest. Paying $300 a month clears it in 21 months for $1,143. The reason is
+    that interest is charged on whatever balance is left each month. Figures are an illustration with
+    fixed monthly payments and monthly compounding; real cards differ in rates, minimum-payment rules
+    and fees.'
+  hashtags:
+  - creditcarddebt
+  - personalfinance
+  - financialliteracy
+  - mathofmoney
+  - learnontiktok
+  tags:
+  - credit card interest
+  - credit card debt
+  - compound interest
+  - personal finance
+  - financial literacy
+assets:
+  voice:
+    id: d8ba9f14-8a24-44db-932b-99e16c45bd32
+    type: preset
+    model: text2speech_v2/elevenlabs
+  scenes:
+  - audio_job_id: 8aec4c4c-7990-4fb9-ad1a-5c84025bb06c
+    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205126_8aec4c4c-7990-4fb9-ad1a-5c84025bb06c.mp3
+  - audio_job_id: 3b39cbee-4ddd-4f5f-a64d-0254d2a9d41b
+    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205127_3b39cbee-4ddd-4f5f-a64d-0254d2a9d41b.mp3
+  - audio_job_id: fda2a1fc-7655-4093-9765-e1376f6dac02
+    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205112_fda2a1fc-7655-4093-9765-e1376f6dac02.mp3
+  - audio_job_id: 8dec4bca-d0a6-4348-9d8d-3a70c89436c6
+    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205112_8dec4bca-d0a6-4348-9d8d-3a70c89436c6.mp3
+  - audio_job_id: 6d4428ad-295a-47a3-8d42-6cc9b98c27fd
+    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205126_6d4428ad-295a-47a3-8d42-6cc9b98c27fd.mp3
+  - audio_job_id: 01db05bb-6ba7-4780-bfda-7bd934b7e4e8
+    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205136_01db05bb-6ba7-4780-bfda-7bd934b7e4e8.mp3
+  - audio_job_id: 36a6f6f7-1c6c-47f9-860c-5e7dc062c18f
+    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205112_36a6f6f7-1c6c-47f9-860c-5e7dc062c18f.mp3
+  - audio_job_id: 75bdff3b-feab-4bb8-8fea-9d7f30914459
+    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205112_75bdff3b-feab-4bb8-8fea-9d7f30914459.mp3
+  - audio_job_id: 385e6098-d66b-49b8-b299-af81a52f97bf
+    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205112_385e6098-d66b-49b8-b299-af81a52f97bf.mp3
+  - audio_job_id: 5185e044-8b52-4e03-8add-d529185e1d0a
+    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205136_5185e044-8b52-4e03-8add-d529185e1d0a.mp3
+  - audio_job_id: 718b6afd-df09-41df-8818-f3b56acc7b6a
+    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205112_718b6afd-df09-41df-8818-f3b56acc7b6a.mp3

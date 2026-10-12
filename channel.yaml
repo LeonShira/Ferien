@@ -1,0 +1,69 @@
+# Channel configuration for the shorts pipeline.
+# Everything the daily agent needs to know about the channel lives here.
+# Change values here, not in code.
+
+channel:
+  name: "Money, Explained"          # working name: rename freely
+  language: en                      # en | de (scripts, captions, number formats and metadata follow this)
+  niche: "personal-finance education, money history and money psychology"
+  disclaimer: "Education & entertainment only. Not financial advice."
+  cta: "Follow for one money idea a day."
+  # What the channel is NOT: these reinforce the compliance lint.
+  never:
+    - individual buy/sell/hold calls on specific stocks, coins or funds
+    - price predictions or "this will 10x"
+    - personalised advice ("you should put your savings into ...")
+    - an on-screen AI "expert" or "advisor" persona
+
+production:
+  renderer: remotion                # motion graphics drawn from code in video/ (no generation credits)
+  min_seconds: 61                   # TikTok Creator Rewards only pays on videos longer than 1 minute
+  max_seconds: 90                   # sweet spot for retention; Shorts allow up to 180 s
+  words_per_second: 2.6             # narration pace used for length estimates
+  width: 1080
+  height: 1920
+  fps: 30
+  loudness_lufs: -14
+  scene_pad_seconds: 0.15           # pause after each narration line
+  end_hold_seconds: 1.2             # extra hold on the final scene for the CTA
+  music_dir: assets/music           # optional: drop royalty-free .mp3 files here for a ducked music bed
+  music_volume_db: -24
+
+higgsfield:
+  # Narration is the only thing that must be generated. ~0.45 credits per line.
+  tts_model: text2speech_v2
+  tts_variant: elevenlabs
+  voice:                            # locked narrator voice: never change mid-series
+    id: d8ba9f14-8a24-44db-932b-99e16c45bd32
+    type: preset
+    name: Cillian
+  # Optional illustrated stills for `image` scenes (history and scam stories). ~1.25 credits each.
+  image_model: seedream_v5_pro
+  image_resolution: "1k"
+  style_reference_media_id: 2d38ba55-76aa-4e03-9d90-bbed0b40a462   # Editorial Motion Graphics preset
+  style_formula: >-
+    editorial cut-paper collage illustration on warm cream paper, flat matte shapes, subtle paper
+    grain, soft drop shadows, palette of cream, charcoal and deep navy with one mustard-yellow accent,
+    one clear focal subject, simple composition, no text, no letters, no numbers, no logos
+
+publishing:
+  provider: upload_post             # upload_post | none (none = render + package only)
+  upload_post_user: ""              # Upload-Post profile name; blank = auto-detect when there is exactly one
+  timezone: Europe/Berlin
+  post_time: "18:30"                # local time; blank = post immediately
+  tiktok:
+    enabled: true
+    post_mode: DIRECT_POST          # DIRECT_POST | MEDIA_UPLOAD (lands in TikTok drafts for a one-tap post)
+    privacy_level: PUBLIC_TO_EVERYONE
+    is_aigc: true                   # TikTok's AI-generated content label: keep on
+  youtube:
+    enabled: true
+    privacy_status: public          # public | unlisted | private
+    category_id: "27"               # 27 = Education
+    contains_synthetic_media: true  # YouTube "altered or synthetic" disclosure
+    made_for_kids: false
+
+budget:
+  max_credits_per_video: 15         # narration (~4) + at most a few illustrated stills
+  min_balance_reserve: 25           # never spend below this balance
+  max_unpublished_buffer: 3         # if this many rendered videos are waiting to be posted, skip generating

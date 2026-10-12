@@ -1,0 +1,337 @@
+topics:
+- id: credit-card-minimum-trap
+  series: the-math
+  idea: Why paying only a fixed small amount on a credit card takes years
+  angle: Same $5,000 balance at 24 % APR, $150 vs $300 a month; months and total interest from payoff calcs
+  priority: 3
+  status: todo
+- id: fifty-percent-loss
+  series: the-math
+  idea: Why a 50 % loss needs a 100 % gain to recover
+  angle: Asymmetry of percentages; -10/-25/-50 % and the gain needed to get back
+  priority: 3
+  status: todo
+- id: rule-of-72
+  series: the-math
+  idea: The Rule of 72, the mental shortcut for doubling time
+  angle: Show the estimate vs the exact doubling time at 3, 6, 9 %; works for inflation and debt too
+  priority: 3
+  status: todo
+- id: fees-one-percent
+  series: the-math
+  idea: What a 1 % annual fee costs over 30 years
+  angle: Same contributions at 7 % vs 6 % net; the gap as a share of the final pot
+  priority: 3
+  status: todo
+- id: start-at-25-vs-35
+  series: the-math
+  idea: Starting 10 years earlier vs saving more later
+  angle: Saver A invests 25-35 then stops, saver B 35-65; illustrative 7 % return, state assumptions
+  priority: 2
+  status: todo
+- id: inflation-cash
+  series: the-math
+  idea: What inflation does to cash under a mattress
+  angle: Real value of 10,000 after 10 and 20 years at 2 %, 3 % and 5 % inflation
+  priority: 2
+  status: todo
+- id: lottery-odds
+  series: the-math
+  idea: How unlikely a lottery jackpot really is
+  angle: Pick 6 of 49 = 1 in 13,983,816 (combinations); visualise with a dot grid and comparisons
+  priority: 2
+  status: todo
+- id: casino-house-edge
+  series: the-math
+  idea: Why the house always wins at roulette
+  angle: Single-zero edge 1/37 = 2.70 %, double-zero 2/38 = 5.26 %; expected loss per 100 bets. Anti-gambling framing
+  priority: 1
+  status: todo
+- id: car-loan-true-cost
+  series: the-math
+  idea: The real price of a car bought on a 6-year loan
+  angle: Monthly payment and total interest at two APRs with loan_payment; sticker price vs total paid
+  priority: 2
+  status: todo
+- id: zero-percent-financing
+  series: the-math
+  idea: How "0 % financing" can still cost money
+  angle: Deferred-interest promotions vs true 0 %; a missed deadline example (state country, check rules)
+  priority: 1
+  status: todo
+- id: tulip-mania
+  series: money-history
+  idea: Tulip mania 1637, and why the famous version is exaggerated
+  angle: The bubble that happened vs the legend; Anne Goldgar's research. Verify prices and dates
+  priority: 3
+  status: todo
+- id: south-sea-bubble
+  series: money-history
+  idea: How Isaac Newton lost a fortune in the South Sea Bubble
+  angle: 1720 timeline; Newton's losses (verify amount and sources; the famous quote is apocryphal)
+  priority: 3
+  status: todo
+- id: weimar-hyperinflation
+  series: money-history
+  idea: When a loaf of bread cost billions of marks (Germany 1923)
+  angle: Timeline of prices in 1922-1923, the Rentenmark fix; verify figures from a museum or central bank source
+  priority: 3
+  status: todo
+- id: first-paper-money
+  series: money-history
+  idea: How China invented paper money a thousand years ago
+  angle: Song dynasty jiaozi, from merchant receipts to state notes, and the first inflation problem
+  priority: 2
+  status: todo
+- id: diners-club-card
+  series: money-history
+  idea: The forgotten-wallet dinner that started credit cards
+  angle: Diners Club 1950, the origin story vs what is documented; how cards spread
+  priority: 2
+  status: todo
+- id: nixon-shock
+  series: money-history
+  idea: The night the dollar stopped being backed by gold (1971)
+  angle: Bretton Woods, 15 August 1971, what "fiat money" means
+  priority: 2
+  status: todo
+- id: black-tuesday
+  series: money-history
+  idea: Black Tuesday 1929 in 60 seconds
+  angle: Margin buying, the crash days, how long the market took to recover (verify)
+  priority: 2
+  status: todo
+- id: zimbabwe-100-trillion
+  series: money-history
+  idea: The 100-trillion-dollar banknote
+  angle: Zimbabwe 2008, how hyperinflation spirals, what replaced the currency
+  priority: 2
+  status: todo
+- id: rai-stones-yap
+  series: money-history
+  idea: The island where money is a giant stone that never moves
+  angle: 'Yap''s rai stones as a ledger: ownership by agreement, the parallel to modern money'
+  priority: 2
+  status: todo
+- id: gamestop-squeeze
+  series: money-history
+  idea: The GameStop short squeeze, explained without hype
+  angle: What a short is, what a squeeze is, January 2021 timeline. No stock opinion
+  priority: 1
+  status: todo
+- id: renting-throwing-money
+  series: myth-vs-fact
+  idea: '"Renting is throwing money away"'
+  angle: Owners also pay unrecoverable costs (interest, maintenance, taxes, opportunity cost); when buying wins
+  priority: 3
+  status: todo
+- id: tax-bracket-myth
+  series: myth-vs-fact
+  idea: '"A raise can push me into a higher bracket and lower my pay"'
+  angle: Marginal brackets explained with a simple made-up 3-bracket system; real systems differ by country
+  priority: 3
+  status: todo
+- id: need-lots-to-invest
+  series: myth-vs-fact
+  idea: '"You need a lot of money to start investing"'
+  angle: Fractional shares and low minimums exist; the bigger factor is time. No product names
+  priority: 2
+  status: todo
+- id: checking-score-hurts
+  series: myth-vs-fact
+  idea: '"Checking your own credit score lowers it"'
+  angle: Soft vs hard inquiries; say which countries' systems this describes
+  priority: 2
+  status: todo
+- id: gold-always-safe
+  series: myth-vs-fact
+  idea: '"Gold always protects you"'
+  angle: Long stretches of flat or falling real gold prices (verify a source); what gold does and does not do
+  priority: 2
+  status: todo
+- id: carry-balance-score
+  series: myth-vs-fact
+  idea: '"Carrying a card balance builds your credit score"'
+  angle: Paying in full still shows usage; interest is a pure cost (US-style scoring, say so)
+  priority: 2
+  status: todo
+- id: more-expensive-better
+  series: myth-vs-fact
+  idea: '"Higher price means better quality"'
+  angle: Price-quality heuristic research; blind taste tests (wine studies), with sources
+  priority: 1
+  status: todo
+- id: savings-account-safe
+  series: myth-vs-fact
+  idea: '"Money in a savings account is perfectly safe"'
+  angle: Safe nominally (deposit insurance limits by country) but loses real value when rates < inflation
+  priority: 2
+  status: todo
+- id: banks-create-money
+  series: how-it-works
+  idea: Banks create money when they lend
+  angle: Bank of England 2014 "Money creation in the modern economy" explains loans create deposits
+  priority: 3
+  status: todo
+- id: how-credit-scores-work
+  series: how-it-works
+  idea: What actually goes into a credit score
+  angle: Payment history, utilisation, length, mix, inquiries (FICO-style); note other countries differ
+  priority: 3
+  status: todo
+- id: how-index-funds-work
+  series: how-it-works
+  idea: How an index fund works
+  angle: Buying a slice of a whole market; why fees matter; no fund names
+  priority: 3
+  status: todo
+- id: how-inflation-measured
+  series: how-it-works
+  idea: How inflation is measured (the basket)
+  angle: CPI basket, weights, why your personal inflation differs
+  priority: 2
+  status: todo
+- id: central-bank-rates
+  series: how-it-works
+  idea: How a central bank decision reaches your loan
+  angle: Policy rate -> interbank -> bank margins -> mortgages and savings rates
+  priority: 2
+  status: todo
+- id: mortgage-amortization
+  series: how-it-works
+  idea: Why early mortgage payments are mostly interest
+  angle: Amortisation with loan_payment; first payment interest share vs last
+  priority: 2
+  status: todo
+- id: how-bnpl-earns
+  series: how-it-works
+  idea: How "buy now, pay later" companies make money
+  angle: Merchant fees, late fees, interest products; why shops offer it
+  priority: 2
+  status: todo
+- id: how-insurance-works
+  series: how-it-works
+  idea: How insurance can pay out more than you paid in
+  angle: Risk pooling and the law of large numbers with a simple dot grid
+  priority: 1
+  status: todo
+- id: what-is-a-bond
+  series: how-it-works
+  idea: What a bond actually is
+  angle: Lending to a government or company; coupons, maturity; why prices move with rates
+  priority: 1
+  status: todo
+- id: card-payment-journey
+  series: how-it-works
+  idea: What happens in the 2 seconds after you tap your card
+  angle: Merchant, acquirer, network, issuer; interchange fee as the hidden cost
+  priority: 2
+  status: todo
+- id: loss-aversion
+  series: money-mind
+  idea: Why losing 100 hurts more than winning 100 feels good
+  angle: Kahneman & Tversky prospect theory (1979); everyday examples
+  priority: 3
+  status: todo
+- id: charm-pricing
+  series: money-mind
+  idea: Why prices end in .99
+  angle: Left-digit effect research; where it shows up
+  priority: 3
+  status: todo
+- id: decoy-pricing
+  series: money-mind
+  idea: The decoy option that makes you pick the expensive one
+  angle: Asymmetric dominance; the magazine subscription example (Ariely), cite carefully
+  priority: 3
+  status: todo
+- id: lifestyle-creep
+  series: money-mind
+  idea: Why a raise rarely feels like a raise for long
+  angle: Hedonic adaptation; the general habit of deciding in advance what a raise is for
+  priority: 2
+  status: todo
+- id: sunk-cost
+  series: money-mind
+  idea: The sunk cost trap
+  angle: Arkes & Blumer (1985) theatre ticket study; examples
+  priority: 2
+  status: todo
+- id: pain-of-paying
+  series: money-mind
+  idea: Why paying by card feels cheaper than cash
+  angle: Pain of paying research (Prelec & Simester 2001 auction study; verify)
+  priority: 2
+  status: todo
+- id: anchoring-salary
+  series: money-mind
+  idea: How the first number in a negotiation steers the result
+  angle: Anchoring studies; how it shows up in prices and salaries
+  priority: 2
+  status: todo
+- id: mental-accounting
+  series: money-mind
+  idea: Why a tax refund feels like free money
+  angle: Thaler's mental accounting; windfalls vs salary
+  priority: 1
+  status: todo
+- id: scarcity-timers
+  series: money-mind
+  idea: '"Only 2 left!": how scarcity cues work on you'
+  angle: Scarcity research and fake countdown timers (EU consumer-protection angle)
+  priority: 1
+  status: todo
+- id: ponzi-scheme
+  series: scam-files
+  idea: How a Ponzi scheme works (and why it always collapses)
+  angle: Charles Ponzi 1920; the math of needing ever more new money (visualise growth)
+  priority: 3
+  status: todo
+- id: pig-butchering
+  series: scam-files
+  idea: The "wrong number" text that ends in a fake trading app
+  angle: Pig-butchering steps and red flags; FBI IC3 loss figures (cite the latest report)
+  priority: 3
+  status: todo
+- id: pump-and-dump
+  series: scam-files
+  idea: How a pump-and-dump works
+  angle: Hype groups, coordinated buying, the dump; protective red flags only
+  priority: 2
+  status: todo
+- id: advance-fee-typos
+  series: scam-files
+  idea: Why scam emails are full of typos on purpose
+  angle: Herley (Microsoft Research, 2012) self-selection argument
+  priority: 2
+  status: todo
+- id: fake-bank-call
+  series: scam-files
+  idea: The fake bank call that sounds completely real
+  angle: Spoofed caller ID, "safe account" transfers; what real banks never ask
+  priority: 3
+  status: todo
+- id: signal-groups
+  series: scam-files
+  idea: The "trading signals" group scam
+  angle: Paid signal groups, fake screenshots of wins, survivorship; red flags list
+  priority: 2
+  status: todo
+- id: mlm-math
+  series: scam-files
+  idea: The math of why most MLM participants lose money
+  angle: Recruitment pyramid growth hits population limits fast; FTC sources on income disclosures
+  priority: 2
+  status: todo
+- id: romance-scam-money
+  series: scam-files
+  idea: How romance scams turn into money requests
+  angle: Grooming timeline, the emergency, payment methods; official loss figures
+  priority: 1
+  status: todo
+- id: qr-code-parking
+  series: scam-files
+  idea: The QR code sticker on the parking meter
+  angle: Quishing; how fake payment pages capture card data; how to check
+  priority: 1
+  status: todo

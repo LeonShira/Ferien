@@ -1,0 +1,101 @@
+# Recurring formats. Rotating between them (the backlog never picks the same
+# series twice in a row) keeps the channel from reading as templated, which
+# YouTube demonetises as "inauthentic content". Each series has its own accent
+# colour, beat structure and visual vocabulary.
+
+series:
+  - id: the-math
+    label: The Math of Money
+    promise: One calculation that changes how you see an everyday money decision.
+    theme: {accent: "#FFD84D"}
+    beats:
+      - hook: a surprising computed number, stated in under 12 words
+      - setup: the everyday situation and its inputs (rate, amount, time)
+      - the math: show the calculation growing (counter or chart)
+      - the twist: compare two scenarios side by side
+      - why it works: the mechanism in one plain sentence
+      - takeaway: a general principle, never a product recommendation
+    visuals: [big_number, line_chart, bar_compare, split_compare, ring]
+    rules:
+      - every number on screen comes from a `calc`, never typed by hand
+      - state assumptions out loud ("at 7 % a year, ignoring fees and taxes")
+
+  - id: money-history
+    label: Money History
+    promise: A true story from financial history, told like a thriller, with the lesson it left behind.
+    theme: {accent: "#F4A261"}
+    beats:
+      - hook: the most dramatic moment, in medias res
+      - context: year, place, what people believed
+      - escalation: three concrete moments on a timeline
+      - the turn: what broke
+      - aftermath: what changed because of it
+      - echo: the pattern that still shows up today
+    visuals: [timeline, image, big_number, quote, title]
+    rules:
+      - every date, figure and quote needs an http(s) source in `claims`
+      - prefer primary or academic sources; flag popular myths (e.g. the scale of tulip mania)
+
+  - id: myth-vs-fact
+    label: Myth vs Fact
+    promise: A money belief most people repeat, tested against the evidence.
+    theme: {accent: "#FF9F80"}
+    beats:
+      - hook: state the myth as people say it
+      - why people believe it: the grain of truth
+      - the test: numbers or mechanism that disprove it
+      - the fact: the accurate version
+      - nuance: when the myth is partly right
+      - takeaway: how to think about it instead
+    visuals: [myth_fact, split_compare, bar_compare, big_number, list]
+    rules:
+      - be fair: steelman the myth before correcting it
+      - country-specific rules (tax, credit scoring) must say which country
+
+  - id: how-it-works
+    label: How Money Works
+    promise: The machinery behind something you use every day, explained in a minute.
+    theme: {accent: "#8BD3C7"}
+    beats:
+      - hook: a question people never think to ask
+      - the parts: who is involved
+      - step by step: the flow of money, 3-4 steps
+      - the surprising part: the non-obvious detail
+      - so what: why it matters for an ordinary person
+      - recap: one-sentence summary
+    visuals: [emoji, list, split_compare, ring, title]
+    rules:
+      - explain mechanisms, not which provider to choose
+      - name institutions only as examples of a category, never as recommendations
+
+  - id: money-mind
+    label: Money Mind
+    promise: The psychology that quietly drives money decisions, backed by research.
+    theme: {accent: "#B8A9FF"}
+    beats:
+      - hook: a scenario the viewer has lived
+      - the bias: name it and the study behind it
+      - the experiment: what researchers actually found
+      - in real life: where it shows up (shops, apps, salaries)
+      - counter-move: a general habit that blunts it
+      - reflection: a question to the viewer
+    visuals: [title, split_compare, dot_grid, quote, emoji]
+    rules:
+      - cite the original study (authors, year) with a source link
+      - do not overstate replication; say "studies suggest" where effects are contested
+
+  - id: scam-files
+    label: Scam Files
+    promise: How a real scam works, step by step, so viewers spot it before it reaches them.
+    theme: {accent: "#FF6B6B"}
+    beats:
+      - hook: the bait as victims first saw it
+      - the setup: who it targets and why it feels safe
+      - the mechanics: 3-4 steps of how money moves
+      - the red flags: the tells, as a list
+      - the scale: one sourced number on losses
+      - protection: general warning signs and where to report (by category, e.g. "your bank, the police")
+    visuals: [list, emoji, timeline, big_number, myth_fact, image]
+    rules:
+      - protective framing only; never explain how to run the scam profitably
+      - loss figures need an official source (FBI IC3, FTC, Europol, BaFin, Action Fraud)

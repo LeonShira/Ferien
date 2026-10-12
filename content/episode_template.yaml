@@ -1,0 +1,32 @@
+id: TODO
+series: TODO
+topic_id: TODO
+language: en
+status: draft
+hook_text: TODO short on-screen hook, max 8 words
+scenes:
+- narration: TODO first line; the first sentence is the hook, max 14 words
+  visual:
+    type: title
+    text: TODO
+- narration: TODO
+  visual:
+    type: big_number
+    to: 0
+    label: TODO
+claims:
+- statement: TODO every number in the narration is a claim
+  check:
+    calc: doubling_years
+    args:
+      rate: 0.07
+    expect: 10.24
+sources: []
+metadata:
+  title: TODO YouTube title, max 90 characters
+  caption: TODO TikTok caption, one or two sentences
+  description: TODO one paragraph for YouTube
+  hashtags:
+  - TODO
+assets:
+  scenes: []
