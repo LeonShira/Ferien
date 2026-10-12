@@ -1,0 +1,272 @@
+id: 2026-10-12-credit-card-minimum-trap
+series: the-math
+topic_id: credit-card-minimum-trap
+language: en
+status: rendered
+hook_text: $5,000 of debt. $150 a month.
+scenes:
+- narration: Pay your card on time every month, and it still takes almost five years.
+  visual:
+    type: title
+    text: The $150-a-month slow lane
+    emoji: 💳
+    accentWords:
+    - slow
+- narration: Say you owe $5,000 on a credit card that charges 24% a year.
+  visual:
+    type: big_number
+    from: 0
+    to: 5000
+    prefix: $
+    label: Card balance
+    emoji: 💳
+    sub: at 24% interest a year
+- narration: You pay 150 a month. But in the first month, 100 of that is just interest.
+  visual:
+    type: ring
+    title: Your first $150 payment
+    value:
+      calc: divide
+      args:
+        a: 100
+        b: 150
+      scale: 100
+      round: 0
+    label: goes straight to interest
+    bad: true
+- narration: At that pace, you're making payments for 56 months before you hit zero.
+  visual:
+    type: big_number
+    from: 0
+    to:
+      calc: payoff_months
+      args:
+        balance: 5000
+        apr: 0.24
+        monthly_payment: 150
+    suffix: ' months'
+    label: Paying $150 a month
+    emoji: 🐢
+    sub: to reach a zero balance
+- narration: All in, that's about 3,300 in interest on top of what you borrowed.
+  visual:
+    type: bar_compare
+    title: What $5,000 really costs
+    prefix: $
+    bars:
+    - label: Borrowed
+      value: 5000
+    - label: Interest on top
+      value:
+        calc: payoff_interest
+        args:
+          balance: 5000
+          apr: 0.24
+          monthly_payment: 150
+        round: 0
+      highlight: true
+- narration: Now pay 300 a month instead. Same card, same rate. You're done in 21 months.
+  visual:
+    type: split_compare
+    title: Same card, two habits
+    left:
+      title: $150 a month
+      emoji: 🐢
+      rows:
+      - 56 months
+      - $3,322 interest
+    right:
+      title: $300 a month
+      emoji: 🚀
+      rows:
+      - 21 months
+      - $1,143 interest
+      highlight: true
+- narration: Look at both lines. The bigger payment ends sooner and leaves less for interest to grow on.
+  visual:
+    type: line_chart
+    title: Balance left
+    prefix: $
+    xSuffix: ' mo'
+    series:
+    - label: $150 a month
+      calc:
+        calc: remaining_balance
+        args:
+          balance: 5000
+          apr: 0.24
+          monthly_payment: 150
+        vary: months
+        from: 0
+        to: 56
+        step: 2
+    - label: $300 a month
+      calc:
+        calc: remaining_balance
+        args:
+          balance: 5000
+          apr: 0.24
+          monthly_payment: 300
+        vary: months
+        from: 0
+        to: 22
+        step: 2
+- narration: That's about two thirds less interest, because it's charged on whatever you still owe.
+  visual:
+    type: bar_compare
+    title: Total interest paid
+    prefix: $
+    bars:
+    - label: $150 a month
+      value:
+        calc: payoff_interest
+        args:
+          balance: 5000
+          apr: 0.24
+          monthly_payment: 150
+        round: 0
+    - label: $300 a month
+      value:
+        calc: payoff_interest
+        args:
+          balance: 5000
+          apr: 0.24
+          monthly_payment: 300
+        round: 0
+      highlight: true
+- narration: Paying on time keeps the late fees away. It just doesn't move the balance much.
+  visual:
+    type: myth_fact
+    myth: A small payment is fine as long as it's on time
+    fact: On time avoids fees, but small payments mostly feed interest
+- narration: So every extra bit you pay early keeps saving you interest, month after month.
+  visual:
+    type: list
+    title: What the math shows
+    items:
+    - Interest is charged on what's left
+    - Small payments mostly feed interest
+    - Extra payments save interest every month after
+- narration: This is just an example, so check your own card's terms. Follow for one money idea a day.
+  visual:
+    type: emoji
+    emojis:
+    - 💳
+    - 🧮
+    - 🧠
+    flow: false
+    label: Know your numbers
+claims:
+- statement: Paying 150 a month takes almost five years (56 months)
+  check:
+    calc: payoff_months
+    args:
+      balance: 5000
+      apr: 0.24
+      monthly_payment: 150
+    expect: 56
+    tolerance: 0
+- statement: 56 months is almost five years
+  check:
+    calc: divide
+    args:
+      a: 56
+      b: 12
+    expect: 4.67
+    tolerance: 0.01
+- statement: Interest takes 100 of the first 150 payment
+  check:
+    calc: multiply
+    args:
+      a: 5000
+      b: 0.02
+    expect: 100
+- statement: About 3,300 in total interest at 150 a month
+  check:
+    calc: payoff_interest
+    args:
+      balance: 5000
+      apr: 0.24
+      monthly_payment: 150
+    expect: 3300
+    tolerance: 0.02
+- statement: Paying 300 a month clears it in 21 months
+  check:
+    calc: payoff_months
+    args:
+      balance: 5000
+      apr: 0.24
+      monthly_payment: 300
+    expect: 21
+    tolerance: 0
+- statement: Interest drops by about two thirds
+  check:
+    calc: percent_change
+    args:
+      old: 3322.09
+      new: 1143.34
+    expect: -0.66
+    tolerance: 0.03
+- statement: 150 vs 300 a month is a 35-month difference
+  check:
+    calc: subtract
+    args:
+      a: 56
+      b: 21
+    expect: 35
+    tolerance: 0
+sources:
+- https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-card-interest-rate-what-does-apr-mean-en-44/
+metadata:
+  title: Why $150 a month on a $5,000 credit card takes almost 5 years
+  caption: Same card, same 24% rate. 150 a month vs 300 a month is a 35-month difference. Here's the math.
+  description: 'A $5,000 credit card balance at 24% interest a year: paying $150 a month takes 56 months
+    and costs $3,322 in interest. Paying $300 a month clears it in 21 months for $1,143. The reason is
+    that interest is charged on whatever balance is left each month. Figures are an illustration with
+    fixed monthly payments and monthly compounding; real cards differ in rates, minimum-payment rules
+    and fees.'
+  hashtags:
+  - creditcarddebt
+  - personalfinance
+  - financialliteracy
+  - mathofmoney
+  - learnontiktok
+  tags:
+  - credit card interest
+  - credit card debt
+  - compound interest
+  - personal finance
+  - financial literacy
+assets:
+  voice:
+    provider: kokoro
+    voice: af_heart
+    seconds: 59.24
+  scenes:
+  - {}
+  - {}
+  - {}
+  - {}
+  - {}
+  - {}
+  - {}
+  - {}
+  - {}
+  - {}
+  - {}
+cost_credits: 5.25
+cost_note: 'pilot: 16 narration lines incl. 5 regenerated after trimming'
+render:
+  path: output/2026-10-12-credit-card-minimum-trap/final.mp4
+  duration: 63.74
+  size_mb: 12.52
+  sha256: b6c29125998da8ce9868c8c4b2322b1dfe9e3a1d115bef99f8948851a00fc8d9
+  music: null
+  checks:
+    resolution: 1080x1920
+    fps: 30.0
+    duration: 63.74
+    has_audio: true
+    mean_volume_db: -17.4
+    passed: true
+    problems: []

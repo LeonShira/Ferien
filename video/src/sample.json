@@ -1,0 +1,392 @@
+{
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "duration": 36.0,
+ "locale": "en-US",
+ "theme": {
+  "paper": "#F3EDE2",
+  "card": "#FFFDF8",
+  "ink": "#14213D",
+  "muted": "#5B6478",
+  "accent": "#FFD84D",
+  "accentInk": "#14213D",
+  "good": "#2A9D8F",
+  "bad": "#E63946"
+ },
+ "seriesLabel": "The Math of Money",
+ "hookText": "The minimum payment trap",
+ "disclaimer": "Education & entertainment only. Not financial advice.",
+ "cta": "Follow for one money idea a day.",
+ "scenes": [
+  {
+   "start": 0.0,
+   "duration": 3.0,
+   "visual": {
+    "text": "Your card's minimum payment is a trap",
+    "emoji": "\ud83d\udcb3",
+    "accentWords": [
+     "trap"
+    ],
+    "type": "title"
+   },
+   "captions": [
+    {
+     "start": 0.1,
+     "end": 1.4,
+     "text": "Sample caption"
+    },
+    {
+     "start": 1.4,
+     "end": 2.8,
+     "text": "with $5,000 at 24%"
+    }
+   ]
+  },
+  {
+   "start": 3.0,
+   "duration": 3.0,
+   "visual": {
+    "from": 0,
+    "to": 5000,
+    "prefix": "$",
+    "label": "Balance",
+    "emoji": "\ud83d\udcb3",
+    "sub": "at 24% APR",
+    "type": "big_number"
+   },
+   "captions": [
+    {
+     "start": 3.1,
+     "end": 4.4,
+     "text": "Sample caption"
+    },
+    {
+     "start": 4.4,
+     "end": 5.8,
+     "text": "with $5,000 at 24%"
+    }
+   ]
+  },
+  {
+   "start": 6.0,
+   "duration": 3.0,
+   "visual": {
+    "title": "Balance over time",
+    "prefix": "$",
+    "xSuffix": "mo",
+    "series": [
+     {
+      "label": "$150/mo",
+      "points": [
+       [
+        0,
+        5000
+       ],
+       [
+        12,
+        4300
+       ],
+       [
+        24,
+        3400
+       ],
+       [
+        36,
+        2300
+       ],
+       [
+        48,
+        900
+       ],
+       [
+        54,
+        0
+       ]
+      ]
+     },
+     {
+      "label": "$300/mo",
+      "points": [
+       [
+        0,
+        5000
+       ],
+       [
+        6,
+        3500
+       ],
+       [
+        12,
+        1900
+       ],
+       [
+        18,
+        250
+       ],
+       [
+        19,
+        0
+       ]
+      ]
+     }
+    ],
+    "type": "line_chart"
+   },
+   "captions": [
+    {
+     "start": 6.1,
+     "end": 7.4,
+     "text": "Sample caption"
+    },
+    {
+     "start": 7.4,
+     "end": 8.8,
+     "text": "with $5,000 at 24%"
+    }
+   ]
+  },
+  {
+   "start": 9.0,
+   "duration": 3.0,
+   "visual": {
+    "title": "Interest paid",
+    "prefix": "$",
+    "bars": [
+     {
+      "label": "$150 a month",
+      "value": 3017
+     },
+     {
+      "label": "$300 a month",
+      "value": 1102,
+      "highlight": true
+     }
+    ],
+    "type": "bar_compare"
+   },
+   "captions": [
+    {
+     "start": 9.1,
+     "end": 10.4,
+     "text": "Sample caption"
+    },
+    {
+     "start": 10.4,
+     "end": 11.8,
+     "text": "with $5,000 at 24%"
+    }
+   ]
+  },
+  {
+   "start": 12.0,
+   "duration": 3.0,
+   "visual": {
+    "myth": "Paying the minimum keeps you safe",
+    "fact": "It mostly pays the bank's interest",
+    "type": "myth_fact"
+   },
+   "captions": [
+    {
+     "start": 12.1,
+     "end": 13.4,
+     "text": "Sample caption"
+    },
+    {
+     "start": 13.4,
+     "end": 14.8,
+     "text": "with $5,000 at 24%"
+    }
+   ]
+  },
+  {
+   "start": 15.0,
+   "duration": 3.0,
+   "visual": {
+    "title": "Same card, two habits",
+    "left": {
+     "title": "Minimum",
+     "emoji": "\ud83d\udc22",
+     "rows": [
+      "54 months",
+      "$3,017 interest"
+     ]
+    },
+    "right": {
+     "title": "Double it",
+     "emoji": "\ud83d\ude80",
+     "rows": [
+      "19 months",
+      "$1,102 interest"
+     ],
+     "highlight": true
+    },
+    "type": "split_compare"
+   },
+   "captions": [
+    {
+     "start": 15.1,
+     "end": 16.4,
+     "text": "Sample caption"
+    },
+    {
+     "start": 16.4,
+     "end": 17.8,
+     "text": "with $5,000 at 24%"
+    }
+   ]
+  },
+  {
+   "start": 18.0,
+   "duration": 3.0,
+   "visual": {
+    "title": "Share of payment that's interest",
+    "value": 66.7,
+    "decimals": 0,
+    "label": "of month one goes to interest",
+    "bad": true,
+    "type": "ring"
+   },
+   "captions": [
+    {
+     "start": 18.1,
+     "end": 19.4,
+     "text": "Sample caption"
+    },
+    {
+     "start": 19.4,
+     "end": 20.8,
+     "text": "with $5,000 at 24%"
+    }
+   ]
+  },
+  {
+   "start": 21.0,
+   "duration": 3.0,
+   "visual": {
+    "title": "Odds of a jackpot?",
+    "total": 100,
+    "highlight": 3,
+    "label": "3 in 100",
+    "type": "dot_grid"
+   },
+   "captions": [
+    {
+     "start": 21.1,
+     "end": 22.4,
+     "text": "Sample caption"
+    },
+    {
+     "start": 22.4,
+     "end": 23.8,
+     "text": "with $5,000 at 24%"
+    }
+   ]
+  },
+  {
+   "start": 24.0,
+   "duration": 3.0,
+   "visual": {
+    "title": "What the math says",
+    "items": [
+     "Pay more than the minimum",
+     "Kill the highest APR first",
+     "Know your total cost"
+    ],
+    "type": "list"
+   },
+   "captions": [
+    {
+     "start": 24.1,
+     "end": 25.4,
+     "text": "Sample caption"
+    },
+    {
+     "start": 25.4,
+     "end": 26.8,
+     "text": "with $5,000 at 24%"
+    }
+   ]
+  },
+  {
+   "start": 27.0,
+   "duration": 3.0,
+   "visual": {
+    "title": "Card history",
+    "events": [
+     {
+      "year": 1950,
+      "label": "Diners Club card"
+     },
+     {
+      "year": 1958,
+      "label": "BankAmericard launches"
+     },
+     {
+      "year": 1966,
+      "label": "Master Charge appears"
+     }
+    ],
+    "type": "timeline"
+   },
+   "captions": [
+    {
+     "start": 27.1,
+     "end": 28.4,
+     "text": "Sample caption"
+    },
+    {
+     "start": 28.4,
+     "end": 29.8,
+     "text": "with $5,000 at 24%"
+    }
+   ]
+  },
+  {
+   "start": 30.0,
+   "duration": 3.0,
+   "visual": {
+    "text": "Compound interest works for you or against you.",
+    "by": "A money proverb",
+    "type": "quote"
+   },
+   "captions": [
+    {
+     "start": 30.1,
+     "end": 31.4,
+     "text": "Sample caption"
+    },
+    {
+     "start": 31.4,
+     "end": 32.8,
+     "text": "with $5,000 at 24%"
+    }
+   ]
+  },
+  {
+   "start": 33.0,
+   "duration": 3.0,
+   "visual": {
+    "emojis": [
+     "\ud83d\udcb3",
+     "\ud83d\udcb8",
+     "\ud83c\udfe6"
+    ],
+    "label": "Where it goes",
+    "type": "emoji"
+   },
+   "captions": [
+    {
+     "start": 33.1,
+     "end": 34.4,
+     "text": "Sample caption"
+    },
+    {
+     "start": 34.4,
+     "end": 35.8,
+     "text": "with $5,000 at 24%"
+    }
+   ]
+  }
+ ]
+}
