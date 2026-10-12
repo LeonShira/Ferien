@@ -4,6 +4,16 @@ Everything else (code, content system, rendering, scheduling) is already set up.
 These steps need you because they involve your identity, your accounts or your money.
 Total time: about 20 minutes.
 
+## 0. Finish the daily Routine (about 1 min)
+
+The Routine **Daily money short** already exists and runs every day at 08:59 Berlin time. It was
+created without connectors, so open it under Routines at https://claude.ai/code, choose **Edit**, then:
+
+- add the **Higgsfield** connector (it makes the narrator voice), and
+- add the **LeonShira/Ferien** repository,
+
+and save. Without the connector, each run stops and reports that it's missing.
+
 ## 1. Create the two channels (about 10 min)
 
 - **TikTok:** create a new account for the channel (a personal account, not a Business account:
