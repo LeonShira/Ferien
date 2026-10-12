@@ -2,9 +2,11 @@ topics:
 - id: credit-card-minimum-trap
   series: the-math
   idea: Why paying only a fixed small amount on a credit card takes years
-  angle: Same $5,000 balance at 24 % APR, $150 vs $300 a month; months and total interest from payoff calcs
+  angle: Same $5,000 balance at 24 % APR, $150 vs $300 a month; months and total interest from payoff
+    calcs
   priority: 3
-  status: todo
+  status: in_progress
+  episode: 2026-10-12-credit-card-minimum-trap
 - id: fifty-percent-loss
   series: the-math
   idea: Why a 50 % loss needs a 100 % gain to recover
@@ -44,7 +46,8 @@ topics:
 - id: casino-house-edge
   series: the-math
   idea: Why the house always wins at roulette
-  angle: Single-zero edge 1/37 = 2.70 %, double-zero 2/38 = 5.26 %; expected loss per 100 bets. Anti-gambling framing
+  angle: Single-zero edge 1/37 = 2.70 %, double-zero 2/38 = 5.26 %; expected loss per 100 bets. Anti-gambling
+    framing
   priority: 1
   status: todo
 - id: car-loan-true-cost
@@ -74,7 +77,8 @@ topics:
 - id: weimar-hyperinflation
   series: money-history
   idea: When a loaf of bread cost billions of marks (Germany 1923)
-  angle: Timeline of prices in 1922-1923, the Rentenmark fix; verify figures from a museum or central bank source
+  angle: Timeline of prices in 1922-1923, the Rentenmark fix; verify figures from a museum or central
+    bank source
   priority: 3
   status: todo
 - id: first-paper-money
@@ -122,7 +126,8 @@ topics:
 - id: renting-throwing-money
   series: myth-vs-fact
   idea: '"Renting is throwing money away"'
-  angle: Owners also pay unrecoverable costs (interest, maintenance, taxes, opportunity cost); when buying wins
+  angle: Owners also pay unrecoverable costs (interest, maintenance, taxes, opportunity cost); when buying
+    wins
   priority: 3
   status: todo
 - id: tax-bracket-myth
@@ -146,7 +151,8 @@ topics:
 - id: gold-always-safe
   series: myth-vs-fact
   idea: '"Gold always protects you"'
-  angle: Long stretches of flat or falling real gold prices (verify a source); what gold does and does not do
+  angle: Long stretches of flat or falling real gold prices (verify a source); what gold does and does
+    not do
   priority: 2
   status: todo
 - id: carry-balance-score

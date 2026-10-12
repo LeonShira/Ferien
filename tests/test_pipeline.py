@@ -154,7 +154,8 @@ def test_build_fields(pilot, channel):
     assert fields["is_aigc"] == "true"
     assert fields["containsSyntheticMedia"] == "true"
     assert fields["categoryId"] == "27"
-    assert fields["scheduled_date"].startswith("2026-10-13")
+    assert fields["scheduled_date"] == "2026-10-13T16:30:00Z"
+    assert "timezone" not in fields
 
 
 def test_next_slot(channel):

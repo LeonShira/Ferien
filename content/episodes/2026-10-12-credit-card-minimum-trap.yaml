@@ -2,7 +2,7 @@ id: 2026-10-12-credit-card-minimum-trap
 series: the-math
 topic_id: credit-card-minimum-trap
 language: en
-status: assets
+status: rendered
 hook_text: $5,000 of debt. $150 a month.
 scenes:
 - narration: Paying $150 a month on a $5,000 card takes almost five years. Here's why.
@@ -12,7 +12,7 @@ scenes:
     emoji: 💳
     accentWords:
     - slow
-- narration: The setup is simple. You owe $5,000 on a credit card that charges 24% interest a year.
+- narration: You owe $5,000 on a credit card that charges 24% interest a year.
   visual:
     type: big_number
     from: 0
@@ -49,7 +49,7 @@ scenes:
     label: Paying $150 a month
     emoji: 🐢
     sub: to reach a zero balance
-- narration: And the interest over that time? $3,322. You hand back $8,322 for $5,000 of stuff.
+- narration: 'Total interest: $3,322. You pay back $8,322 for $5,000 of stuff.'
   visual:
     type: bar_compare
     title: What $5,000 really costs
@@ -66,8 +66,7 @@ scenes:
           monthly_payment: 150
         round: 0
       highlight: true
-- narration: Now double the payment to $300. Same card, same rate. You're debt-free in 21 months, with
-    $1,143 of interest.
+- narration: Double it to $300 a month, and you're done in 21 months, with $1,143 of interest.
   visual:
     type: split_compare
     title: Same card, two habits
@@ -114,8 +113,8 @@ scenes:
         from: 0
         to: 22
         step: 2
-- narration: Doubling the payment cuts the total interest by about two thirds, because interest is charged
-    on whatever is left, every single month.
+- narration: That's about two thirds less interest, because interest is charged on whatever is left, every
+    month.
   visual:
     type: bar_compare
     title: Total interest paid
@@ -143,8 +142,7 @@ scenes:
     type: myth_fact
     myth: A small payment is fine as long as it's on time
     fact: On time avoids fees, but small payments mostly feed interest
-- narration: 'The rule behind it: interest grows on what''s left, so every extra dollar paid early saves
-    interest every month after.'
+- narration: So every extra dollar paid early saves interest for every month after it.
   visual:
     type: list
     title: What the math shows
@@ -276,23 +274,39 @@ assets:
   scenes:
   - audio_job_id: 8aec4c4c-7990-4fb9-ad1a-5c84025bb06c
     audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205126_8aec4c4c-7990-4fb9-ad1a-5c84025bb06c.mp3
-  - audio_job_id: 3b39cbee-4ddd-4f5f-a64d-0254d2a9d41b
-    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205127_3b39cbee-4ddd-4f5f-a64d-0254d2a9d41b.mp3
+  - audio_job_id: 791e9d6c-2499-42d1-ab65-8d8720294ff2
+    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_211501_791e9d6c-2499-42d1-ab65-8d8720294ff2.mp3
   - audio_job_id: fda2a1fc-7655-4093-9765-e1376f6dac02
     audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205112_fda2a1fc-7655-4093-9765-e1376f6dac02.mp3
   - audio_job_id: 8dec4bca-d0a6-4348-9d8d-3a70c89436c6
     audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205112_8dec4bca-d0a6-4348-9d8d-3a70c89436c6.mp3
-  - audio_job_id: 6d4428ad-295a-47a3-8d42-6cc9b98c27fd
-    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205126_6d4428ad-295a-47a3-8d42-6cc9b98c27fd.mp3
-  - audio_job_id: 01db05bb-6ba7-4780-bfda-7bd934b7e4e8
-    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205136_01db05bb-6ba7-4780-bfda-7bd934b7e4e8.mp3
+  - audio_job_id: a337d169-0b67-4bb2-aa45-a6543a6e34d8
+    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_211501_a337d169-0b67-4bb2-aa45-a6543a6e34d8.mp3
+  - audio_job_id: 58b088d5-9302-43d8-887a-271bf2e28187
+    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_211502_58b088d5-9302-43d8-887a-271bf2e28187.mp3
   - audio_job_id: 36a6f6f7-1c6c-47f9-860c-5e7dc062c18f
     audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205112_36a6f6f7-1c6c-47f9-860c-5e7dc062c18f.mp3
-  - audio_job_id: 75bdff3b-feab-4bb8-8fea-9d7f30914459
-    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205112_75bdff3b-feab-4bb8-8fea-9d7f30914459.mp3
+  - audio_job_id: b74070e4-fcbf-427b-b3a3-9634e42e8927
+    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_211510_b74070e4-fcbf-427b-b3a3-9634e42e8927.mp3
   - audio_job_id: 385e6098-d66b-49b8-b299-af81a52f97bf
     audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205112_385e6098-d66b-49b8-b299-af81a52f97bf.mp3
-  - audio_job_id: 5185e044-8b52-4e03-8add-d529185e1d0a
-    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205136_5185e044-8b52-4e03-8add-d529185e1d0a.mp3
+  - audio_job_id: 99046223-10b8-49ba-a4d9-79f8ad698bfb
+    audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_211510_99046223-10b8-49ba-a4d9-79f8ad698bfb.mp3
   - audio_job_id: 718b6afd-df09-41df-8818-f3b56acc7b6a
     audio_url: https://d8j0ntlcm91z4.cloudfront.net/user_3JNQae2MB9nKVVhtDrLyOGMO2Fp/hf_20261012_205112_718b6afd-df09-41df-8818-f3b56acc7b6a.mp3
+render:
+  path: output/2026-10-12-credit-card-minimum-trap/final.mp4
+  duration: 80.47
+  size_mb: 15.01
+  sha256: fd6abbedf4feef0bbbd2e6038b6cb6fc7b101a5c098667422e6462e2fbdeefee
+  music: null
+  checks:
+    resolution: 1080x1920
+    fps: 30.0
+    duration: 80.47
+    has_audio: true
+    mean_volume_db: -16.9
+    passed: true
+    problems: []
+cost_credits: 5.25
+cost_note: 'pilot: 16 narration lines incl. 5 regenerated after trimming'

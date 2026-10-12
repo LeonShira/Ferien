@@ -10,4 +10,5 @@ if (browser) {
 Config.setVideoImageFormat('jpeg');
 Config.setJpegQuality(92);
 Config.setOverwriteOutput(true);
-Config.setChromiumOpenGlRenderer('swangle');
+// 'angle' renders ~3x faster than 'swangle' on CPU-only cloud machines.
+Config.setChromiumOpenGlRenderer('angle');

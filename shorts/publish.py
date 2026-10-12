@@ -36,7 +36,7 @@ def compose_texts(episode: dict, channel: dict) -> dict:
     if sources:
         desc.append("Sources:\n" + "\n".join(f"- {s}" for s in sources))
     desc.append(disclaimer)
-    desc.append("Script written with AI assistance and checked before publishing; visuals and voice are AI-generated.")
+    desc.append("Made with AI: script, visuals and voice are AI-generated, and every figure is recomputed before publishing.")
     desc.append(" ".join(tags + ["#Shorts"]))
     title = meta["title"].strip()
     return {
@@ -142,7 +142,8 @@ def build_fields(episode: dict, channel: dict, user: str, platforms: list[str],
                    ("selfDeclaredMadeForKids", str(bool(yt.get("made_for_kids", False))).lower())]
         fields += [("tags[]", t) for t in texts["tags"]]
     if scheduled:
-        fields += [("scheduled_date", scheduled), ("timezone", pub.get("timezone", "UTC"))]
+        utc = datetime.fromisoformat(scheduled).astimezone(ZoneInfo("UTC"))
+        fields.append(("scheduled_date", utc.strftime("%Y-%m-%dT%H:%M:%SZ")))
     else:
         fields.append(("async_upload", "true"))
     return fields

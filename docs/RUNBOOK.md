@@ -13,8 +13,8 @@ python -m shorts status
 
 - Higgsfield `balance`: if credits < `budget.min_balance_reserve` + 10, stop and report
   "Higgsfield credits low" (do not buy anything).
-- If `status` shows `budget.max_unpublished_buffer` or more episodes waiting in `rendered`,
-  skip production. Try `publish` for the oldest instead, then report.
+- If `budget.max_unpublished_buffer` or more episodes are waiting in `rendered`, skip steps 1-4
+  (don't spend credits) and go straight to step 5.
 
 ## 1. Pick and research the topic
 
@@ -33,7 +33,7 @@ regulator sources. If the evidence is weak or disputed, pick the next topic
 Edit `content/episodes/<id>.yaml` (format: the pilot `2026-10-12-credit-card-minimum-trap.yaml`).
 
 - Follow the series `beats`, in your own words. Change the hook pattern from the last episodes.
-- 9-13 scenes, one sentence or two per scene, 165-200 words total (~65-80 s).
+- 9-13 scenes, one or two sentences per scene, 145-170 words total (~70-80 s at the voice's ~2.15 words/s).
 - First sentence <= 14 words and it states the payoff. `hook_text` <= 8 words.
 - Narration: plain spoken English with figures as digits ("$5,000", "24%"), no filler.
 - Explain, never advise. Use "here's how it works" and "the math shows", never "you should buy, sell or invest".
@@ -74,7 +74,14 @@ python -m shorts render <id>   # Remotion motion graphics + narration mix + QA, 
   (`ffmpeg -ss 12 -i output/<id>/final.mp4 -frames:v 1 output/<id>/check.jpg`, then Read the image).
   Fix overflowing text, overlapping elements or unreadable charts before publishing.
 
-## 5. Publish
+## 5. Publish (exactly one post per run)
+
+Publish the **oldest** episode in `rendered` (`python -m shorts status`), which is today's
+only when nothing older is waiting. One post per day keeps the cadence steady.
+
+Each run starts in a fresh container, so an older episode's `output/<id>/final.mp4` won't exist.
+Rebuild it first; it costs no credits because the narration URLs are stored in the episode:
+`python -m shorts fetch <id> && python -m shorts render <id>`.
 
 ```bash
 python -m shorts publish <id> --dry-run   # inspect captions and settings

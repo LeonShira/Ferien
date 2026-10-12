@@ -51,7 +51,7 @@ export const BigNumberScene: React.FC<P> = ({v, durationInFrames}) => {
   const value = from + (to - from) * run;
   const text = fmt(value, locale, num(v.decimals), str(v.prefix), str(v.suffix));
   const finalText = fmt(to, locale, num(v.decimals), str(v.prefix), str(v.suffix));
-  const size = fit(finalText, 230, 120, 6);
+  const size = Math.min(230, Math.floor(BOX.width / (0.62 * Math.max(1, finalText.length))));
   const pop = enter(frame, fps, 0, 10);
   const underline = progress(frame, Math.max(20, durationInFrames * 0.55), Math.max(28, durationInFrames * 0.55 + 12));
   return (
@@ -62,7 +62,7 @@ export const BigNumberScene: React.FC<P> = ({v, durationInFrames}) => {
       )}
       <div style={{position: 'relative', transform: `scale(${0.6 + pop * 0.4})`}}>
         <div style={{fontFamily: DISPLAY, fontWeight: 900, fontSize: size, color: theme.ink, letterSpacing: -4,
-          fontVariantNumeric: 'tabular-nums', lineHeight: 1}}>{text}</div>
+          fontVariantNumeric: 'tabular-nums', lineHeight: 1, whiteSpace: 'nowrap'}}>{text}</div>
         <div style={{position: 'absolute', left: 0, bottom: -18, height: 26, width: `${underline * 100}%`,
           background: theme.accent, borderRadius: 13, zIndex: -1}} />
       </div>

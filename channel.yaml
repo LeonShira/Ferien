@@ -19,7 +19,7 @@ production:
   renderer: remotion                # motion graphics drawn from code in video/ (no generation credits)
   min_seconds: 61                   # TikTok Creator Rewards only pays on videos longer than 1 minute
   max_seconds: 90                   # sweet spot for retention; Shorts allow up to 180 s
-  words_per_second: 2.6             # narration pace used for length estimates
+  words_per_second: 2.15            # measured pace of the locked voice (pilot: 191 words in 90.4 s)
   width: 1080
   height: 1920
   fps: 30
