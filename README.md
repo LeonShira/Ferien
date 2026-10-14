@@ -27,3 +27,4 @@ python -m pytest tests                        # 25 tests
 | [docs/RUNBOOK.md](docs/RUNBOOK.md) | What the daily agent does, step by step |
 | [docs/VISUALS.md](docs/VISUALS.md) | Scene types and computed numbers for script writing |
 | [docs/VOICE.md](docs/VOICE.md) | Writing narration that sounds like a person |
+| [docs/GROWTH_PLAN.md](docs/GROWTH_PLAN.md) | Monetisation, the batch "workshop then autopilot" plan |
